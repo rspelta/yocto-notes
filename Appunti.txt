@@ -1,7 +1,10 @@
 # yocto-notes
 
-$> bitbake -g <package> -u depexp
-visualizza la lista delle dipendenze della ricetta che si vuole compilare
+$> bitbake -g <recipe> -u depexp
+Shows all the dependencies of a recipe
 
 $> bitbake-layers show-recipes
-visualizza la lista di tutte le ricette compilabili
+Shows all the recipes compilable
+
+$> bitbake <recipe> -c listtasks
+To list the tasks definited for a recipe
