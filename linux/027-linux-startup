@@ -9,7 +9,7 @@ sudo update-rc.d -f <script> remove
   
 Per il debug guardare in /var/log/
 
-STARTUP (ubuntu)
+STARTUP (ubuntu, vedi http://upstart.ubuntu.com/getting-started.html)
 cd /etc/init
 creare il tuo .conf copiandolo da un altro... lo script parte con:
   exec <eseguibile> <parametri>
