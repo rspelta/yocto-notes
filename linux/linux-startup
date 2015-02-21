@@ -1,0 +1,36 @@
+INIT
+cd /etc/init.d
+sudo cp skeleton <script nuovo>
+  editi il tuo script
+sudo update-rc.d do-sync start 99 2 3 4 5 . stop 99 0 1 6 .
+  creerà S99 ai livelli 2 3 4 5 per lo start, K99 ai livelli 0 1 6 per lo stop
+sudo update-rc.d -f <script> remove
+  elimina lo script dal boot
+  
+Per il debug guardare in /var/log/
+
+STARTUP (ubuntu)
+cd /etc/init
+creare il tuo .conf copiandolo da un altro... lo script parte con:
+  exec <eseguibile> <parametri>
+prima e dopo l'exec si può aggiungere:
+  pre-start script
+    # prepare environment
+  end script
+  exec ....
+  post-stop script
+    # clean up
+  end script
+  
+  - Quando è partito può inviare un evento con il comando "emit"
+  - Per l'ordine di partenza si utilizza:
+    start on startup
+    start on runlevel [23]
+    start on stopped rcS
+    start on started tty1 <- è un emit di un altro .conf
+  
+  per fare il check della sinstassi del .conf creato usare:
+
+    init-checkconf <file>.conf
+    
+  Il debug lo trovi in /var/log/startup
