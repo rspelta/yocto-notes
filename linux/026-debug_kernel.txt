@@ -1,0 +1,2 @@
+- Usare seascope come IDE del progetto del kernel
+- Una volta compilato il kernel il file System.map contiene tutti i nomi delle funzioni del kernel e il loro indirizzo, utile per sapere a quale funzione punta un puntatore a funzione.
