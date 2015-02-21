@@ -1,0 +1,5 @@
+DEVICETREE
+==========
+
+video:      https://www.youtube.com/watch?v=m_NyYEBxfn8
+esempio:    http://xillybus.com/tutorials/device-tree-zynq-1

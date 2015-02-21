@@ -1,0 +1,24 @@
+Mount Samba folder
+==================
+
+1. Install the package:
+
+sudo apt-get install smbfs
+
+2. If for example you want mount the folder “backup” of the server in “/mnt/extern/progetti” directory, then launch:
+
+sudo mount.cifs //126.126.126.42/backup /mnt/extern/progetti -o rw,user=guest,password=anonymous
+
+3. If you want check that is mounted type “mount”, will be showed a list of the directories mounted on your PC, ones of them will be like this:
+
+//126.126.126.42/backup on /mnt/extern/progetti type cifs (rw)
+
+4. If you upload some file remember to use the command:
+
+sync
+
+5. Once you have finished to use the server umount the directory, following the previous example:
+
+sudo umount /mnt/extern/progetti/
+
+That's all!

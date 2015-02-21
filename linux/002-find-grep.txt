@@ -1,0 +1,19 @@
+FIND&GREP
+=========
+Due amici per cercare qualcosa.
+
+find [dir di partenza] [opzioni] [nome file da trovare]
+es.
+find . -iname "pippo*"  - cerca ricorsivamente dalla cartella corrente (.) tutti i file che iniziano con pippo, non case sensitive
+
+-----------------------
+
+grep [opzioni] [stringa] [dir di partenza]
+
+grep -r "pippo" .       - cerca ricorsivamente (-r) a partire dalla directory corrente (.) in tutti i file la stringa pippo, case sensitive. -i per non case sensitive.
+
+-----------------------
+
+find . -iname ".gitignore" -exec grep -iHn "bin" '{}' \;    - cerca ricorsivamente, dalla directory corrente, tutti i file .gitignore in cui all'interno ci sia la scritta bin, non case sensitive.
+
+

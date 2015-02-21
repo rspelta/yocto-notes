@@ -1,0 +1,20 @@
+fromdos                 converte file di testo di windows in linux
+master-pdf-editor       editor di pdf
+pinta                   programma per disegnare
+anki                    flashcards
+skype                   skype
+virtualbox              vm
+vmware                  vm
+dropbox                 share
+seascope                kernel project
+transmission            bit torrent client
+synaptic packet manager manager pacchetti
+debsums                 check integrità pacchetti installati
+audacity                programma per editare l'audio
+xmodmap                 per rimappare i tasti (xkeycaps versione grafica front-end)
+spotify									player di musica online
+axel										come wget ma scarica con multiple connessioni
+
+da testare
+nginx										engine-x, è un web-server leggero e ad alte prestazioni, fa anche da server proxy per la posta elettronica
+proftpd									server ftp

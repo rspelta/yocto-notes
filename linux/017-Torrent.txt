@@ -1,0 +1,10 @@
+Creare un Torrent
+=================
+
+sudo apt-get install transmission-cli transmission-daemon
+transmission-create file_da_condividere -t udp://tracker.openbittorrent.com:80/announce
+chmod uog+r file_da_condividere.torrent
+
+in "/etc/transmission-daemon/settings.json" ci sono le proprietà
+restart transmission-daemon
+

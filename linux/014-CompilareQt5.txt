@@ -1,0 +1,125 @@
+Compilare le QT5
+================
+
+1. Scaricare
+
+	wget http://download.qt-project.org/official_releases/qt/5.2/5.2.1/single/qt-everywhere-opensource-src-5.2.1.tar.gz
+	tar -zxvf qt-everywhere-opensource-src-5.2.1.tar.gz
+	o anche le qt-everywhere-opensource-src-5.3.1.tar.xz
+	
+
+2. Creare nella cartella (qt-everywhere-opensource-src-5.2.1/qtbase/mkspecs/devices/linux-arm-xilinx-zynq-g++) i sequenti file
+
+	qmake.conf:
+	-----------
+	
+	#
+	# qmake configuration for linux-g++ using arm-xilinx-g++ compiler
+	#
+	 
+	MAKEFILE_GENERATOR      = UNIX
+	CONFIG                 += incremental gdb_dwarf_index
+	QMAKE_INCREMENTAL_STYLE = sublib
+	 
+	include(../../common/linux.conf)
+	include(../../common/gcc-base-unix.conf)
+	include(../../common/g++-unix.conf)
+	 
+	load(device_config)
+	 
+	QT_QPA_DEFAULT_PLATFORM = linuxfb
+	 
+	# modifications to g++.conf
+	QMAKE_CC                = $${CROSS_COMPILE}gcc
+	QMAKE_CXX               = $${CROSS_COMPILE}g++
+	QMAKE_LINK              = $${QMAKE_CXX}
+	QMAKE_LINK_SHLIB        = $${QMAKE_CXX}
+	 
+	# modifications to linux.conf
+	QMAKE_AR                = $${CROSS_COMPILE}ar cqs
+	QMAKE_OBJCOPY           = $${CROSS_COMPILE}objcopy
+	QMAKE_NM                = $${CROSS_COMPILE}nm -P
+	QMAKE_STRIP             = $${CROSS_COMPILE}strip
+	 
+	QMAKE_CFLAGS           += -I$$[QT_SYSROOT]/include -DZYNQ
+	QMAKE_CXXFLAGS         += -Wno-psabi -I$$[QT_SYSROOT]/include -DZYNQ
+	QMAKE_LFLAGS           += -L$$[QT_SYSROOT]/lib
+	 
+	QMAKE_CFLAGS           += -march=armv7-a -mcpu=cortex-a9 -mtune=cortex-a9 -mfpu=neon -pipe -fomit-frame-pointer
+	QMAKE_CXXFLAGS         += $$QMAKE_CFLAGS
+	 
+	deviceSanityCheckCompiler()
+	 
+	load(qt_config)
+	
+	
+	qplatformdefs.h
+	---------------
+	
+	/****************************************************************************
+	**
+	** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
+	** Contact: http://www.qt-project.org/legal
+	**
+	** This file is part of the qmake spec of the Qt Toolkit.
+	**
+	** $QT_BEGIN_LICENSE:LGPL$
+	** Commercial License Usage
+	** Licensees holding valid commercial Qt licenses may use this file in
+	** accordance with the commercial license agreement provided with the
+	** Software or, alternatively, in accordance with the terms contained in
+	** a written agreement between you and Digia.  For licensing terms and
+	** conditions see http://qt.digia.com/licensing.  For further information
+	** use the contact form at http://qt.digia.com/contact-us.
+	**
+	** GNU Lesser General Public License Usage
+	** Alternatively, this file may be used under the terms of the GNU Lesser
+	** General Public License version 2.1 as published by the Free Software
+	** Foundation and appearing in the file LICENSE.LGPL included in the
+	** packaging of this file.  Please review the following information to
+	** ensure the GNU Lesser General Public License version 2.1 requirements
+	** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+	**
+	** In addition, as a special exception, Digia gives you certain additional
+	** rights.  These rights are described in the Digia Qt LGPL Exception
+	** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
+	**
+	** GNU General Public License Usage
+	** Alternatively, this file may be used under the terms of the GNU
+	** General Public License version 3.0 as published by the Free Software
+	** Foundation and appearing in the file LICENSE.GPL included in the
+	** packaging of this file.  Please review the following information to
+	** ensure the GNU General Public License version 3.0 requirements will be
+	** met: http://www.gnu.org/copyleft/gpl.html.
+	**
+	**
+	** $QT_END_LICENSE$
+	**
+	****************************************************************************/
+	 
+	#include "../../linux-g++/qplatformdefs.h"
+	
+	
+3. Inserire queste variabili d'ambiente nella shell:
+
+	export CROSS_COMPILE=arm-xilinx-linux-gnueabi-
+	export PATH=$PATH:/home/architech/architech_sdk/architech/zedboard/toolchain/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi
+
+l'ambiente di compilazione deve vedere sia il gcc locale che quello del cross-compilatore.
+Nella sysroot mettere l'immagine della sato e compilare yocto con "(libEGL-mesa, libGBM), libGLES-mesa, libGL-mesa-DRI, libDRM" che sono nelle ricette "mesa" e "mesa-gl"
+modificare poi il file "/usr/include/EGL/eglplatform.h" l'ifdef deve entrare in MESA_EGL_NO_X11_HEADERS
+
+
+4. Lanciare il configure:
+
+	- confiturazione base con solo il framebuffer:
+		./configure -prefix /opt/Qt/5.2.1 -device linux-arm-xilinx-zynq-g++ -device-option CROSS_COMPILE=/home/architech/architech_sdk/architech/zedboard/toolchain/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi- -confirm-license -opensource -verbose -sysroot /home/architech/architech_sdk/architech/zedboard/sysroot/ -linuxfb
+	
+	- configurazione con opengl:
+		./configure -prefix /opt/Qt/5.2.1     -device linux-arm-xilinx-zynq-g++ -device-option CROSS_COMPILE=/home/architech/architech_sdk/architech/microzed/toolchain/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi-   -confirm-license     -opensource  -opengl   -verbose -sysroot /home/architech/architech_sdk/architech/microzed/sysroot/ -linuxfb -no-xcb -eglfs
+		
+5. Lanciare il make:
+
+	make -j X
+	
+6. il kernel deve avere il modulo DMR

@@ -1,0 +1,23 @@
+Elminare Kernel Vecchi
+
+UBUNTU
+
+• Per vedere i kernel installati:
+dpkg --get-selections | grep linux-image
+
+• Per vedere il kernel correntemente usato:
+uname -r
+
+• Per rimuovere i/il kernel non usati:
+sudo apt-get purge linux-image-3.2.0-27-generic linux-image-3.2.0-29-generic
+
+• Per rimuovere i rimasugli:
+sudo apt-get autoremove 
+
+CENTOS
+
+• Per vedere i kernel installati:
+rpm -q kernel
+
+• Per eliminare i kernel si utilizza il comando derivato dal package 'yum-utils'. Il count serve per definire quanti lasciarne.
+package-cleanup --oldkernels --count=2

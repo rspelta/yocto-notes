@@ -1,0 +1,22 @@
+SATO & OpenedHand
+=================
+
+Per lanciare sato fare:
+/etc/init.d/xserver-nodrm start
+
+Attenzione usa il network manager:
+/etc/init.d/connman
+come bug non accetta SSID con all'interno degli spazi
+
+Per creare una icona sul desktop di sato fare:
+
+/usr/share/applications/qtmediaplayer.desktop 
+[Desktop Entry]
+Name=QT Media Player
+Exec=/usr/bin/qt4/demos/qmediaplayer/qmediaplayer
+Icon=qtmediaplayer
+Terminal=false
+Type=Application
+X-MB-SingleInstance=true
+Comment=Qt Media Player
+StartupNotify=false

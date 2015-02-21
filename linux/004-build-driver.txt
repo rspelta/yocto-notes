@@ -1,0 +1,32 @@
+BUILD DRIVER
+============
+
+Makefile:
+===========================================================================
+ifeq ($(KERNELRELEASE),)
+
+KERNELDIR ?= <INSERT_PATH_WHERE_IS_THE_LINUX_KERNEL_SOURCE>/linux 
+PWD := $(shell pwd)
+
+.PHONY: build clean
+
+build:
+	$(MAKE) -C $(KERNELDIR) M=$(PWD) modules
+
+clean:
+	rm -rf *.o *~ core .depend .*.cmd *.ko *.usbtouchscreen.c
+else
+
+$(info Building with KERNELRELEASE = ${KERNELRELEASE})
+obj-m :=	usbtouchscreen.o
+
+endif
+============================================================================
+
+launch the command:
+
+make ARCH=arm CROSS_COMPILE=/usr/bin/arm-linux-gnueabi-
+
+Your driver compiled is:
+
+xxx.ko

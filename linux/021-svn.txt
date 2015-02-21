@@ -1,0 +1,11 @@
+SVN
+===
+
+Il commit parte dalla cartella in cui lo lanci in su, le directory sotto non le controlla se ci sono state delle modifiche, quindi si rischia di non salvare tutto se non si fa il commit dalla cartella base.
+
+svn commit -m "commento"
+svn co http://126.126.126.127/svn/RSR905 --username roby
+
+per aggiornare dalla cartella in su il progetto nel caso qualcuno ha committato
+svn update
+

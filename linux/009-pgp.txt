@@ -1,0 +1,53 @@
+PGP Signature
+=============
+Complete guide: https://www.gnupg.org/gph/en/manual/book1.html
+
+OpenPGP format is an open standard RFC4880 (http://www.ietf.org/rfc/rfc4880.txt), the most widely used standard for public encryption.
+GPG is the GNU project's complete and free implementation of the OpenPGP standard.
+
+Every user generates a pair of keys, one "public" and one "private/secret". The public key can be sent to the world keeping their secret key private and safe
+
+If you have a person B's public key, you can do these things with it:
+    - encrypt a message that only Person B can decript (they need their secret key to decript it)
+    - VALIDATE that person B signed a message with his secret key. (and you know that the message was not modified/corrupted)
+With your secret key you can do these things:
+    - decrypt messages encrypted with your public key
+    - SIGN messages that other can verify came from you (they need your public key to verify suignature)
+
+GPG commands
+------------
+
+gpg --gen-key           create a public/private gpg key pair. You will be prompted to enter a passphrase. After use mouse and keyboard tp generate random bits.
+                        - DSA ans ElGamal
+                        - 2048 keysize
+                        - 0 never expires
+                        - real name
+                        - email
+                        - comment
+
+gpg --gen-revoke --armor --output=RevocationCertificate.asc your@email.address  used to revoke your key in all the world
+
+gpg --list-secret-keys  list keys you have installed
+
+gpg --export-secret-key -a 454CBFAB > MYORG-GPG-KEY.private export private key for safe keeping. 454CBFAB is "sec" field after the /
+
+gpg --export -a 454CBFAB > MYORG-GPG-KEY.public             export public key for safe keeping
+
+gpg --import MYORG-GPG-KEY.private                          import a private GPG key
+
+gpg --clearsign filename.txt    the message is not encrypted but is signed
+gpg --verify filename.asc       verifying signature of a signed message not encrypted
+
+gpg --detach-sign filename      used for binary file, is not encrypted and the sign is in filename.sig file
+gpg --verify filename.asc       verifying signature of a .sig file
+
+gpg --encrypt --output filename.out --sign --recipient your@mail.com filename   encrypt with public key
+gpg --output test.txt --decrypt test.txt.gpg                                    decrypt
+
+Someone can create a public key with the same name and email address, so you must be sure that the public key you want get came from the right person. To verify if you have the correct public key you can verify his fingerprint, a sort of crc.
+
+gpg  --fingerprint name@email.com   with this you can tell this number to the person that have sent to you the public key
+
+
+
+https://futureboy.us/pgp.html

@@ -1,0 +1,82 @@
+HOWTO KERNEL ESAWARE
+====================
+
+Installazione
+-------------
+git clone https://github.com/esaware/esaware-kernel.git
+
+Compilazione (toolchain yocto 1.5.1)
+------------------------------------
+cd esaware-kernel
+ARCH=arm CROSS_COMPILE=arm-poky-linux-gnueabi- make esa_defconfig  // make savedefconfig per salvare il defconfig in arch/arm/configs
+ARCH=arm CROSS_COMPILE=arm-poky-linux-gnueabi- make uImage
+ARCH=arm CROSS_COMPILE=arm-poky-linux-gnueabi- make modules
+ARCH=arm CROSS_COMPILE=arm-poky-linux-gnueabi-  INSTALL_MOD_PATH="/path/to/kernel-modules"  make modules_install
+make esaXXX.dtb
+
+SD-Card
+-------
+cp arch/arm/boot/uImage /path/to/sdcard/boot
+cp arch/arm/boot/dts/esaXXX.dtb /path/to/sdcard/boot
+cp -r /path/to/kernel/modules /path/to/sdcard/rootfs
+
+Comandi per gestire le periferiche
+----------------------------------
+
+[ LAN ]
+Per assegnare il mac address utilizzare queste variabili:
+    eth1addr=e4:11:5b:ef:0f:2b
+    ethaddr=1c:ba:8c:af:55:e0
+
+[ M25P80 ]
+La vede come:
+    /dev/mtd0
+Si utilizza per cancellarla il comando:
+    flash_erase /dev/mtd0 0 0
+
+[ TOUCH ]
+Si utilizzano le TSLIB: ts_calibrate,...
+
+[ RTC M41T81 ]
+Per testare l'rtc si utilizzano i sequenti comandi:
+    date 10250045 && hwclock -f /dev/rtc1 -w
+rtc1 se è abilitato anche l'rtc0 del am33xx
+
+[ DEVICE USB ]
+Per utilizzarlo usare il modulo driver
+    modprobe g_mass_storage file=/dev/mmcblk1p1
+Documenti:
+    http://processors.wiki.ti.com/index.php/UsbgeneralpageLinux-v3p1#MUSB_OTG_gadget_configuration
+    http://processors.wiki.ti.com/index.php/AM335x_USB_Driver%27s_Guide#MUSB_Controller_Overview
+
+[ LEDS ]
+Si controllano i GPIO (GPIOx1_x2, x=x1*32+x2=1*32+30=62):
+es. GPIO1_30 OUT
+    echo 62 > /sys/class/gpio/export
+    echo "out" > /sys/class/gpio/gpio62/direction
+    echo 1 > /sys/class/gpio/gpio62/value
+    echo 62 > /sys/class/gpio/unexport
+
+es. GPIO1_30 IN
+    echo 62 > /sys/class/gpio/export
+    echo "in" > /sys/class/gpio/gpio62/direction
+    AM33XX_PIN_INPUT_PULLUP -> echo 37 > /sys/kernel/debug/omap_mux/mcasp0_axr1
+    AM33XX_PIN_INPUT_PULLDOWN -> echo 27 > /sys/kernel/debug/omap_mux/mcasp0_axr1
+    cat /sys/class/gpio/gpio62/value
+Documento:
+    http://idrawone.blogspot.it/2013/04/test-gpio-on-am335x.html
+
+[ BUZZER ]
+cd /sys/class/pwm/pwmchip0
+echo 1 > export
+cd pwm1
+echo 1 > enable
+Documento:
+    http://processors.wiki.ti.com/index.php/Linux_Core_PWM_User%27s_Guide
+
+[ eMMC ]
+La vede come /dev/mmc1, per formattarla:
+    fdisk /dev/block/mmcblk1    - si crea una partizione unica nuova, con filesystem 83 ad esempio e si salva
+    mkfs.ext3 /dev/block/mmcblk1p1
+Documento:
+    http://forum.xda-developers.com/showthread.php?t=907436

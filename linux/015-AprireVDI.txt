@@ -1,0 +1,19 @@
+APRIRE UN VDI
+=============
+
+PACCHETTI NECESSARI:
+
+sudo apt-get install qemu-utils
+
+MONTARE:
+
+	sudo modprobe nbd max_part=16
+	sudo qemu-nbd -c /dev/nbd0 file.vdi
+	sudo mount -t auto /dev/nbd0pX /abs_path/to/mount/ - dove X è la partizione da montare, in genere la 1
+
+SMONTARE:
+
+una volta montata la si usa poi si fa l'umount e infine:
+
+	qemu-nbd -d /dev/nbd0
+	

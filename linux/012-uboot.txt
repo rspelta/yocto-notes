@@ -1,0 +1,35 @@
+U-BOOT
+======
+
+L'u-boot e' utilizzato come bootloader per processori ARM.
+Con il comando di 'help' si hanno tutte le info necessarie. 
+
+BOOTCMD
+La variabile d'ambiente piu' importante è 'bootcmd'. Questa viene lanciata all'avvio.
+    bootcmd = run ...
+normalmente lancia una variabile con la stringa dei comandi da utilizzare per fare il boot.
+
+Ad esempio se si vuole bootare direttamente da sd card con comandi preimpostati si usera'
+    bootcmd=mmc rescan && fatload mmc 0:1 0x3000000 uImage && fatload mmc 0:1 0x2ff0000 devicetree.dtb && bootm 0x3000000 - 0x2fF0000
+
+Se invece si vuole utilizzare il file uEnv.txt per caricare in override le variabili si useranno questi comandi:
+    bootcmd=fatload mmc 0 0x3000000 uEnv.txt && env import -t 0x3000000 $filesize && run uenv_boot
+
+In cui in uEnv.txt portremo avere:
+    uenv_boot=fatload mmc 0:1 0x3000000 uImage && fatload mmc 0:1 0x2ff0000 devicetree.dtb && bootm 0x3000000 - 0x2fF0000
+
+
+comando1 && comando2    - eseguirà il comando2 solo se il comando1 è stato eseguito con successo
+comando1; comando2      - esegue entrambi i comandi indipendentemente dal risultato del comando1
+
+Normalmente si usa la configurazione
+
+bootmode=sdcard
+bootcmd=run $bootmode
+sdcard=mmc rescan && fatload mmc 0:1 0x3000000 uImage && fatload mmc 0:1 0x2ff0000 devicetree.dtb && bootm 0x3000000 - 0x2fF0000
+uenv=fatload mmc 0:1 0x3000000 uImage && fatload mmc 0:1 0x2ff0000 devicetree.dtb && bootm 0x3000000 - 0x2fF0000
+
+BOOTARGS
+è la variabile con i parametri con cui il kernel viene lanciato (se nel dtb non è gia' cablato con che parametri partire)
+solitamente i parametri sono del genere:
+bootargs=ttyPS0,115200n8 root=/dev/mmcblk0p2 rw rootwait earlyprintk

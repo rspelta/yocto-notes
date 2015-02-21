@@ -1,0 +1,27 @@
+RPM
+===
+from: http://www.centos.org/docs/5/html/Deployment_Guide-en-US/pt-pkg-management.html
+
+RPM is a packaging system. RPM mantains a database of installed packages and their files. The design goals of RPM are:
+1. upgradability: you can upgrade individual components of your system without completely reinstalling. Configuration files in packages are preserved across upgrades.
+2. querying: you can find out what package a file belongs to and from where the package came. It has a binary header containing useful information about itself and the files in a compressed archive.
+3. system verification: if you are worried that you deleted an important file for some package, you can verify the package.
+4. pristine sources: within RPM, you have the pristine sources along with any patches that were used, plus complete build instructions.
+
+RPM has five basic modes of operation:
+1. installing   rpm -Uvh foo-1.0-1.i386.rpm, the segnature of a package is checked automatically. Install a new package, if exist already a file installed the installation stops. The dependency are not resolved, you need do it manually. Do not use U option for installing new kernel version, but use i option. See "upgrading".
+2. uninstalling rpm -e foo remove the package only if in the dependency tree is a leaf.
+3. upgrading    rpm -Uvh foo-2.0-1.i386.rpm 1. uninstall any old versions of the foo package. 2. install the new package version. If a modified configuration file of a package is not forward compatible, it will be saved as .conf.rpmsave
+3a. freshing    rpm -Fvh foo-1.2-1.i386.rpm update the package only if exist already.
+4. querying     rpm -q foo the database RPM is in /var/lib/rpm/
+5. verifying    rpm -Va foo verify packages installed, crc, size, permissions, if all files exist...
+
+Pratical And Common Examples of RPM Usage
+-----------------------------------------
+
+rpm -Va                 finds if a file has been deleted accidantally by you
+rpm -qf /path/to/file   find out which package owns it
+rpm -Vf /path/to/file   verify the package contains that file
+rpm -qdf /path/to/file  locate the documentation which came with the package that owns that program
+rpm -qip file.rpm       find information about it
+rpm -qlp file.rpm       list of the files contained from the package

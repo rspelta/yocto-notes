@@ -1,0 +1,14 @@
+YOCTO
+=====
+bitbake user manual:        http://www.yoctoproject.org/docs/1.6/bitbake-user-manual/bitbake-user-manual.html
+poky ref manual:            http://www.yoctoproject.org/docs/1.0/poky-ref-manual/poky-ref-manual.html
+yocto project quick start:  http://www.yoctoproject.org/docs/current/mega-manual/mega-manual.html
+freescale manual: 					https://community.freescale.com/servlet/JiveServlet/previewBody/95096-102-10-7847/yocto_tutorial.pdf
+
+CONOSCERE LE RICETTE PRESENTI NEI META-LAYERS:
+bitbake-layers show-recipes
+
+COMPILARE IL KERNEL
+bitbake -f -c compile virtual/kernel
+bitbake -f -c deploy virtual/kernel
+

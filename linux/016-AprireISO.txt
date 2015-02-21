@@ -1,0 +1,22 @@
+MONTARE UNA ISO
+===============
+
+1. Usare il programma "parted nome-immagine-iso", dare il comando "unit" e dargli come opzione "b"
+2. dare il comando print per vedere le partizioni all'interno della iso. Es:
+
+Model:  (file)
+Disk /media/windows7/Lavoro/linux-temp/hachiko.sdcard.img: 3930062848B
+Sector size (logical/physical): 512B/512B
+Partition Table: msdos
+
+Number  Start      End          Size         Type     File system  Flags
+ 1      4194304B   12582911B    8388608B     primary               lba
+ 2      12582912B  3930062847B  3917479936B  primary  ext3
+
+3. Con questo esempio fare i comandi:
+
+	mkdir boot
+	mkdir rootfs
+	sudo mount -o loop,offset=4194304 hachiko.sdcard.img boot/
+	sudo mount -o loop,offset=12582912 hachiko.sdcard.img rootfs/
+

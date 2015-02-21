@@ -1,0 +1,4 @@
+SEASCOPE 0.8
+============
+
+Se da problemi con cscope fare il rebuild del database

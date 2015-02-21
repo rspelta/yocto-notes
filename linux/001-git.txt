@@ -1,0 +1,32 @@
+GIT
+===
+
+git init                            inizializza il repository nuovo
+git remote add origin url.git       definisce dove bisogna pusharlo
+git add *                           aggiunge i file al commit (nuovi o modificati)
+git status                          dice cosa verrà committato e cosa non verrà committato
+git commit -m "start"               commit locale
+git push -u origin master           salvataggio sul server
+git pull                            si sincronizza con il server scaricando eventuali aggiornamenti dal server
+git push -u origin mynewfeature     push di un ramo nuovo appena creato
+git log                             visualizza tutta la storia dei commit mettendo anche il numero sha identificativo
+
+git reset --hard HEAD^              to get back to previous commit (you'll lose working tree)
+git reset --soft HEAD               to get to previous commit (preserves working tree)
+
+git push -f origin HEAD^:master     to undo a git push in branch master
+
+git clean -d -x -f                  will remove untracked files, including directories (-d) and files ignored by git (-x).
+
+git checkout -b newbranch           crea un nuovo ramo
+git checkout branch                 passa da un ramo all'altro
+
+git reset --soft HEAD~1             If you have committed junk but not pushed, è un rollback
+git revert HEAD                     This will create a new commit that reverses everything introduced by the accidental commit.
+
+git branch -a                       view all branches
+git checkout origin/branchname      If you just want to take a quick peek at an upstream branch, you can check it out directly
+git checkout -b bname origin/bname  But if you want to work on that branch, you'll need to create a local tracking branch
+
+git tag -a v1.1.0A -m 'v1.1.0A'			crea un tag con il commento -m
+git push origin v1.1.0A							per salvarlo sul server va dato poi questo comando

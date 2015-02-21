@@ -1,0 +1,10 @@
+TCPDUMP
+=======
+
+sudo tcpdump -i eth0 -n 'src not 192.168.0.100' -s 100 -XX
+
+legge dalla periferica eth0
+-n non converte gli indirizzi in nomi
+'src not 192.168.0.100' espressione per i filtri, in questo caso tutto tranne l'ip 0.100
+-s 100 dimensione massima del pacchetto da visualizzare il resto viene tralasciato
+- indicare sulla pengwyn di riprogrammare la NAND quando si passa dalla vm di TI alla nostra vm

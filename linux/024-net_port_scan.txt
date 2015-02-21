@@ -1,0 +1,8 @@
+CHECK PORTE
+===========
+
+Per vedere quali porte sono aperte su un dispositivo remoto:
+nmap INDIRIZZO_IP
+
+Per vedere quali porte sono aperte sul dispositvo locale:
+netstat -a

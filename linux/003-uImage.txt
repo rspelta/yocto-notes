@@ -1,0 +1,19 @@
+BUILD KERNEL
+============
+
+ARCH=arm CROSS_COMPILE=arm-poky-linux-gnueabi- make menuconfig                                          - opzioni kernel scritte poi nel .config
+ARCH=arm CROSS_COMPILE=arm-poky-linux-gnueabi- make mrproper                                            - pulisce tutto
+ARCH=arm CROSS_COMPILE=arm-poky-linux-gnueabi- make -j 4 uImage                                              - crea l'uImage in arch/arm/boot
+ARCH=arm CROSS_COMPILE=arm-poky-linux-gnueabi- INSTALL_MOD_PATH=${MODULES_PATH} make modules            - compila i moduli
+ARCH=arm CROSS_COMPILE=arm-poky-linux-gnueabi- INSTALL_MOD_PATH=${MODULES_PATH} make modules_install    - installa i moduli
+ARCH=arm CROSS_COMPILE=arm-poky-linux-gnueabi- make xxx.dtb                                             - compila il device tree
+
+per salvare un defconfig
+------------------------
+ARCH=arm CROSS_COMPILE=arm-poky-linux-gnueabi- make savedefconfig
+mv defconfig arch/arm/configs/name_defconfig
+
+per ripristinare un defconfig salvato
+-------------------------------------
+make mrproper
+ARCH=arm CROSS_COMPILE=arm-poky-linux-gnueabi- make name_defconfig

@@ -1,0 +1,41 @@
+REPO
+====
+The Multiple Git Repository Tool
+Repo permette di tenere traccia e gestire più repository git contemporaneamente. Attraverso un comando si può tenere sincronizzati tutti i repository. Per definire quali repository si vuole gestire si utilizza un manifest file. 
+
+Il repo manifest descrive la struttura del client di repo. Definisce le directory che sono visibili e a che repository git si riferiscono. I manifest sono mantenuti dal git repository, con repo sync vengono aggiornati se necessario.
+Il formato è il sequente:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+    <remote
+        name        = "openembedded"
+        fetch       = "git://git.openembedded.org/"
+    />
+
+    <project
+        name        = "meta-openembedded"
+        remote      = "openembedded"
+        revision    = "40e0f371f3eb1628655c484feac0cebf810737b4"
+    />
+</manifest>
+
+
+<manifest></manifest>   - root element del file
+<remote ... />          - Ogni elemento specifica un repository git condiviso da uno o più progetti
+    name                - definisce un nome unico utilizzato poi in ogni progetto
+    fetch               - prefisso della url di git per tutti i progetti che usano questo elemento
+<project ... />         - ogni elemento descrive un singolo git repository che deve clonato nel repo client workspace
+    name                - nome unico per il progetto, questo viene messo in append alla proprietà fetch dell'elemento remote
+    remote              - nome di un elemento remote definito prima dell'elemento project
+    revision            - specifica il commit che si vuole avere
+
+INSTALLAZIONE
+-------------
+curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ${HOME}/bin/repo
+    curl è un wget più avanzato
+repo init -u https://github.com/architech-boards/tibidabo-manifest.git -b dora -m manifest.xml
+    inizializza il workspace di repo, scarica il manifest per sapere quali repository deve tenere traccia
+repo sync
+    sincronizza tutti i repository definiti nel manifest
+

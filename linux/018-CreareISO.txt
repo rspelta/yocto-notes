@@ -1,0 +1,50 @@
+CREARE UNA IMMAGINE DA ZERO
+---------------------------
+
+dd if=/dev/zero of=image.iso bs=1M count=3500
+fdisk image.iso
+	w
+	n p 1 start:8192 end:24575 blocks:8192 id:c system:W95 FAT32 (LBA)
+	a 1
+	n p 2 start:24576 end:xxx blocks:xxx id:83 system:Linux
+	t 1 c
+	t 2 83
+sudo kpartx -a image.iso
+sudo mkfs.vfat /dev/mapper/loop0p1
+sudo mkfspp.ext4 /dev/mapper/loop0p2
+sudo kpartx -d image.iso
+
+parted image.iso
+	unit
+	b
+	p
+	quit
+	
+Number  Start      End          Size         Type     File system  Flags
+ 1      1048576B   22020095B    20971520B    primary  fat16        boot
+ 2      22020096B  3550478335B  22020096B    primary  ext4
+
+sudo mount -o loop,offset=1048576 image.iso boot
+sudo mount -o loop,offset=22020096 image.iso rootfs
+
+
+        Device Boot      Start         End      Blocks   Id  System
+/dev/mmcblk0p1            8192       24575        8192    c  W95 FAT32 (LBA)
+/dev/mmcblk0p2           24576     7829503     3902464   83  Linux
+
+CREARE DA UNA GIA' ESISTENTE MODIFICANDO LA DIMENSIONE DI UNA PARTIZIONE
+------------------------------------------------------------------------
+
+sudo fdisk /dev/mmcblk0
+fdisk ${DEVICE} <<EOF
+d
+2
+n
+p
+2
+24576
+w
+EOF
+
+resize2fs /dev/mmcblk0p2
+sync

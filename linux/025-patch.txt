@@ -1,0 +1,19 @@
+COME CREARE PATCH
+=================
+
+1. dal progetto originale A copiarlo rinominandolo in B
+2. modificare il progetto in B
+3. per creare la patch lanciare il comando:
+    diff -Naur ORIGINALE/ MODIFICATO/ > nome.patch
+
+* Alternativa se vuoi verificare la differenza solo per certi tipi di file (nell'esempio i .c e i .h):
+
+find . -name '*.[ch]' -exec diff -wibu PATH_ORIGINALE/{} PATH_MODIFICATO/{} \; > ../linux.patch
+
+
+COME APPLICARE LA PATCH
+=======================
+
+1. per applicare la patch:
+    patch -p1 -d A/ < nome.patch
+

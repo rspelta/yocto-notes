@@ -1,0 +1,37 @@
+YUM
+===
+Yellow dog Updater, Modifier.
+
+E' un tool per piattaforme basate sui pacchetti RPM. Gli RPM sono archiviati in repositories. Questi archivi non hanno solamente i pacchetti RPM ma anche dei metadata (repomd) che descrivono dove trovare l'RPM che stai cercando e risolvono eventuali dipendenze.
+I repository base hanno solo software certificato dalla Red Hat Enterprise Linux. Quindi possono essere versioni datate ma aggiornate solo per fixare eventuali bug di sicurezza.
+I repository ufficiali sono:
+- base          pacchetti della iso, upstream ovvero ufficiali compatibili Red Hat Enterprise Linux
+- updates       fix dei pacchetti della iso
+- addons        non rilasciati upstream, servono per compilare i pacchetti sorgenti base. Non intaccano i pacchetti upstream
+- contrib       non abilitato di default, pacchetti extra, abbastanza sicuri non dovrebbero intaccare i pacchetti base
+- centosplus    non abilitato di default, pacchetti extra, possono aggiornare anche i pacchetti base
+- extras        pacchetti extra, testati, non influiscono mai con i pacchetti base
+- testing       non sicuri
+- third-party   vedi http://wiki.centos.org/AdditionalResources/Repositories
+
+$ yum update                    update
+$ yum update nome_pacchetto     update singolo pacchetto
+$ yum install nome_pacchetto    singolo pacchetto
+$ yum group list                lista pacchetti per tipo
+$ yum group install nome_gruppo installa il gruppo di pacchetti
+$ yum group remove nome_gruppo  rimuove tutti i pacchetti che fanno parte di quel gruppo
+$ yum remove nome_pacchetto     rimuove il singolo pacchetto e quelli che dipendono da lui ma non quelli dai cui lui dipende
+$ yum list nome_pacchetto       cerca il pacchetto con quel nome nei repository
+$ yum search desc               cerca un pacchetto anche con una descrizione
+
+Per la ricerca bisogna sapere la nomenclatura dei pacchetti RPM:
+
+    package_name-version-release.architecture.rpm
+
+Il file di configurazione si trova in /etc/yum.conf le proprieta' utili sono:
+- installonly_limit=5   numero di versioni kernel installabili
+
+Per aggiungere manualmente un repository in yum bisogna inserire 2 elementi, il file di repo e la chiave di segnatura.
+- i repo file vanno salvati in /etc/yum.repos.d/
+- i le chiavi di segnatura vanno importate tramite il comando di rpm, ad esempio 'rpm --import http://centos.karan.org/RPM-GPG-KEY-karan.org.txt'
+
