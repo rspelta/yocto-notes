@@ -33,3 +33,6 @@ BOOTARGS
 è la variabile con i parametri con cui il kernel viene lanciato (se nel dtb non è gia' cablato con che parametri partire)
 solitamente i parametri sono del genere:
 bootargs=ttyPS0,115200n8 root=/dev/mmcblk0p2 rw rootwait earlyprintk
+
+Note:
+- Di default non si può modificare la variabile ethaddr dalla shell perchè è protetta.
