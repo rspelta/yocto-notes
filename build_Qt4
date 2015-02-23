@@ -1,0 +1,63 @@
+QT 4.8.6
+========
+
+TSLIB
+=====
+Le Qt dipendono dalle TSLIB, necessarie per funzionare con il touchscreen. Quindi per prima cosa servono le librerie e i file di definizione delle TSLIB.
+1. Per fare questo far compilare a bitbake la ricetta:
+  bitbake tslib
+2. Il progetto, sorgenti e compilato si troverà nella directory:
+  
+
+QT
+==
+1. Scaricare qt-everywhere-opensource-src-4.8.6.tar.gz, non lo zip perchè i file sono salvati in fomrato di windows.
+  axel http://download.qt.io/official_releases/qt/4.8/4.8.6/qt-everywhere-opensource-src-4.8.6.tar.gz
+  
+2. Decomprimerlo
+  tar -zxvf qt-everywhere-opensource-src-4.8.6.tar.gz
+  
+3. Creare la directory di configurazione mkspec per l'architettura che si vuole utilizzare
+  cd qt-everywhere-opensource-src-4.8.6
+  cp -r mkspecs/qws/linux-arm-g++/ mkspecs/qws/linux-<board usata>-g++
+  cd mkspecs/qws/linux-<board usata>-g++/
+  gedit qmake.conf
+  
+4. Editare il qmake.conf con i parametri dell'ambiente di compilazione utilizzato, per esempio:
+#
+# qmake configuration for building with arm-linux-g++
+#
+
+include(../../common/linux.conf)
+include(../../common/gcc-base-unix.conf)
+include(../../common/g++-unix.conf)
+include(../../common/qws.conf)
+
+# modifications to g++.conf
+QMAKE_CC                = arm-poky-linux-gnueabi-gcc --sysroot=/home/architech/architech_sdk/architech/pengwyn/toolchain/sysroots/cortexa8t2hf-vfp-neon-poky-linux-gnueabi
+QMAKE_CXX               = arm-poky-linux-gnueabi-g++ --sysroot=/home/architech/architech_sdk/architech/pengwyn/toolchain/sysroots/cortexa8t2hf-vfp-neon-poky-linux-gnueabi
+QMAKE_LINK              = arm-poky-linux-gnueabi-g++ --sysroot=/home/architech/architech_sdk/architech/pengwyn/toolchain/sysroots/cortexa8t2hf-vfp-neon-poky-linux-gnueabi
+QMAKE_LINK_SHLIB        = arm-poky-linux-gnueabi-g++ --sysroot=/home/architech/architech_sdk/architech/pengwyn/toolchain/sysroots/cortexa8t2hf-vfp-neon-poky-linux-gnueabi
+
+QMAKE_CFLAGS_RELEASE = -O3 -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=hard
+QMAKE_INCDIR += /home/architech/qt/tslib-1.0/src
+QMAKE_LIBDIR += /home/architech/qt/tslib-1.0/lib
+
+
+# modifications to linux.conf
+QMAKE_AR                = arm-poky-linux-gnueabi-ar cqs
+QMAKE_OBJCOPY           = arm-poky-linux-gnueabi-objcopy
+QMAKE_STRIP             = arm-poky-linux-gnueabi-strip
+
+load(qt_config)
+  
+5. non utilizzare il source dell'ambiente della toolchain ma semplicemente aggiungere la path di dove si trovano i binari della cross-toolchain:
+  export PATH=${PATH}:/home/architech/architech_sdk/architech/pengwyn/toolchain/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/
+
+6. Nella directory "qt-everywhere-opensource-src-4.8.6" lanciare la configurazione del build con i determinati parametri a seconda della scheda utilizzata:
+  - pengwyn: ./configure -opensource -confirm-license -prefix /usr/local/Trolltech-arm -no-qt3support -embedded arm -little-endian -qt-kbd-linuxinput -qt-mouse-tslib -qt-mouse-linuxinput -xplatform qws/linux-pengwyn-g++ -qtlibinfix E
+  - tibidabo: ./configure -no-pch -opensource -confirm-license -prefix /usr/local/Trolltech/Tibidabo -no-qt3support -embedded arm -nomake examples -nomake demo -little-endian -qt-kbd-linuxinput -qt-mouse-tslib -qt-mouse-linuxinput -xplatform qws/linux-tibidabo-g++ -qtlibinfix E
+  NB: Appena dato il comando deve iniziare a compilare per x86 non per ARM
+
+7. Compila le qt a velocità smodata
+  make -j X
