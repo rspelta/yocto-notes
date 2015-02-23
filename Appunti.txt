@@ -8,3 +8,6 @@ Shows all the recipes compilable
 
 $> bitbake <recipe> -c listtasks
 To list the tasks definited for a recipe
+
+$> bitbake <recipe> -c listtasks
+To list all the tasks  for the recipe
