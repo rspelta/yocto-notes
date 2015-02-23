@@ -1,3 +1,7 @@
+SDK
+===
+1. Creare la versione "lite" con solo lo splashscreen installato, l'utente installa la board andando su update.
+
 MICROZED & ZEDBOARD
 ===================
 1. Per compilare il kernel bisogna prima configuare git con i dati utente e email altrimenti fallisce la compilazione.
