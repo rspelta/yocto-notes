@@ -4,6 +4,8 @@ Mount Samba folder
 1. Install the package:
 
 sudo apt-get install smbfs
+oppure
+sudo apt-get install cifs-utils
 
 2. If for example you want mount the folder “backup” of the server in “/mnt/extern/progetti” directory, then launch:
 
