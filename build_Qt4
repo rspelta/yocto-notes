@@ -1,6 +1,10 @@
 QT 4.8.6
 ========
 
+Siti di riferimento:
+- http://qt-project.org/forums/viewthread/38665
+- https://chaitramohankumar.wordpress.com/2014/08/13/building-qt4-8-6-for-embedded-linux/
+
 TSLIB
 =====
 Le Qt dipendono dalle TSLIB, necessarie per funzionare con il touchscreen. Quindi per prima cosa servono le librerie e i file di definizione delle TSLIB.
