@@ -53,7 +53,9 @@ QMAKE_OBJCOPY           = arm-poky-linux-gnueabi-objcopy
 QMAKE_STRIP             = arm-poky-linux-gnueabi-strip
 
 load(qt_config)
-  
+
+NB: QMAKE_CFLAGS_RELEASE non so se lo usa, cmq QMAKE_CC e QMAKE_CXX devono avere quelle opzioni altrimenti la compilazione fallisce
+
 5. non utilizzare il source dell'ambiente della toolchain ma semplicemente aggiungere la path di dove si trovano i binari della cross-toolchain:
   export PATH=${PATH}:/home/architech/architech_sdk/architech/pengwyn/toolchain/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/
 
