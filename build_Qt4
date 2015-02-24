@@ -5,27 +5,45 @@ Siti di riferimento:
 - http://qt-project.org/forums/viewthread/38665
 - https://chaitramohankumar.wordpress.com/2014/08/13/building-qt4-8-6-for-embedded-linux/
 
+
 TSLIB
 =====
 Le Qt dipendono dalle TSLIB, necessarie per funzionare con il touchscreen. Quindi per prima cosa servono le librerie e i file di definizione delle TSLIB.
 1. Per fare questo far compilare a bitbake la ricetta:
   bitbake tslib
+
 2. Il progetto, sorgenti e compilato si troverà nella directory:
   ~/architech_sdk/architech/pengwyn/yocto/build/tmp/work/cortexa8t2hf-vfp-neon-poky-linux-gnueabi/tslib/1.1-r0/sysroot-destdir/usr/
 
-QT
-==
+
+PREPARARE LA CROSS-TOOLCHAIN
+============================
+
+1. Copiare la rootfs della toolchain nella sysroot, es. per la pengwyn
+  cd ~/architech_sdk/architech/pengwyn/toolchain/sysroots/cortexa8t2hf-vfp-neon-poky-linux-gnueabi
+  cp -r * ~/architech_sdk/architech/pengwyn/sysroot
+  
+2. Copiare i binari delle TSLIB compilati con yocto:
+  cd ~/architech_sdk/architech/pengwyn/yocto/build/tmp/work/cortexa8t2hf-vfp-neon-poky-linux-gnueabi/tslib/1.1-r0/sysroot-destdir/
+  cp -r usr/ ~/architech_sdk/architech/pengwyn/sysroot
+
+3. non utilizzare il source dell'ambiente della toolchain ma semplicemente aggiungere la path di dove si trovano i binari della cross-toolchain:
+  export PATH=${PATH}:/home/architech/architech_sdk/architech/pengwyn/toolchain/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/
+
+
+COMPILARE LE QT
+===============
+
 1. Scaricare qt-everywhere-opensource-src-4.8.6.tar.gz, non lo zip perchè i file sono salvati in fomrato di windows.
   axel http://download.qt.io/official_releases/qt/4.8/4.8.6/qt-everywhere-opensource-src-4.8.6.tar.gz
   
-2. Decomprimerlo
+2. Decomprimerlo:
   tar -zxvf qt-everywhere-opensource-src-4.8.6.tar.gz
   
 3. Creare la directory di configurazione mkspec per l'architettura che si vuole utilizzare
   cd qt-everywhere-opensource-src-4.8.6
   cp -r mkspecs/qws/linux-arm-g++/ mkspecs/qws/linux-<board usata>-g++
-  cd mkspecs/qws/linux-<board usata>-g++/
-  gedit qmake.conf
+  gedit mkspecs/qws/linux-<board usata>-g++/qmake.conf
   
 4. Editare il qmake.conf con i parametri dell'ambiente di compilazione utilizzato, per esempio:
 #
@@ -56,21 +74,15 @@ load(qt_config)
 
 NB: QMAKE_CFLAGS_RELEASE non so se lo usa, cmq QMAKE_CC e QMAKE_CXX devono avere quelle opzioni altrimenti la compilazione fallisce
 
-5. non utilizzare il source dell'ambiente della toolchain ma semplicemente aggiungere la path di dove si trovano i binari della cross-toolchain:
-  export PATH=${PATH}:/home/architech/architech_sdk/architech/pengwyn/toolchain/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/
-
-6. Nella directory "qt-everywhere-opensource-src-4.8.6" lanciare la configurazione del build con i determinati parametri a seconda della scheda utilizzata:
-  - pengwyn: ./configure -I"/home/architech/architech_sdk/architech/pengwyn/yocto/build/tmp/work/cortexa8t2hf-vfp-neon-poky-linux-gnueabi/tslib/1.1-r0/sysroot-destdir/usr/include/" -L"/home/architech/architech_sdk/architech/pengwyn/yocto/build/tmp/work/cortexa8t2hf-vfp-neon-poky-linux-gnueabi/tslib/1.1-r0/sysroot-destdir/usr/lib" -opensource -confirm-license -prefix /usr/local/Trolltech -no-qt3support -embedded arm -little-endian -qt-mouse-tslib -xplatform qws/linux-pengwyn-g++ -qtlibinfix E
+5. Nella directory "qt-everywhere-opensource-src-4.8.6" lanciare la configurazione del build con i determinati parametri a seconda della scheda utilizzata:
+  - pengwyn: ./configure -I"/home/architech/architech_sdk/architech/pengwyn/yocto/build/tmp/work/cortexa8t2hf-vfp-neon-poky-linux-gnueabi/tslib/1.1-r0/sysroot-destdir/usr/include/" -L"/home/architech/architech_sdk/architech/pengwyn/yocto/build/tmp/work/cortexa8t2hf-vfp-neon-poky-linux-gnueabi/tslib/1.1-r0/sysroot-destdir/usr/lib" -opensource -confirm-license -prefix /usr/local/Trolltech/Pengwyn -no-qt3support -embedded arm -little-endian -qt-mouse-tslib -xplatform qws/linux-pengwyn-g++ -qtlibinfix E
   - tibidabo: (da ritestare) ./configure -no-pch -opensource -confirm-license -prefix /usr/local/Trolltech/Tibidabo -no-qt3support -embedded arm -nomake examples -nomake demo -little-endian -qt-kbd-linuxinput -qt-mouse-tslib -qt-mouse-linuxinput -xplatform qws/linux-tibidabo-g++ -qtlibinfix E
   NB: Appena dato il comando deve iniziare a compilare per x86 non per ARM
 
-7. Durante la compilazione cercherà le librerie tslib ma non le troverà come se QMAKE_INCDIR e QMAKE_LIBDIR fossero inutili. Per ovviare a questo problema copiare direttamente i binari delle tslib nella sysroot vista dal compilatore:
-   cd /home/architech/architech_sdk/architech/pengwyn/yocto/build/tmp/work/cortexa8t2hf-vfp-neon-poky-linux-gnueabi/tslib/1.1-r0/sysroot-destdir/
-   cp -r usr/ ~/architech_sdk/architech/pengwyn/toolchain/sysroots/cortexa8t2hf-vfp-neon-poky-linux-gnueabi/
-   Non è il massimo, se si vogliono fare le cose pulite usare la sysroot /home/architech/architech_sdk/architech/<board>/sysroot, adattando anche il qmake.conf
-
-8. Compila le qt a velocità smodata
+6. Compila le qt a velocità smodata
    make -j X
 
-9. Installa sulla macchina:
+7. Installa sulla macchina:
    sudo make install
+   Le installerà nella path indicata nel configure con il parametro "-prefix", di solito le inseriamo in /usr/local/Trolltech/<Nome_scheda>
+   
