@@ -11,7 +11,7 @@ Le Qt dipendono dalle TSLIB, necessarie per funzionare con il touchscreen. Quind
 1. Per fare questo far compilare a bitbake la ricetta:
   bitbake tslib
 2. Il progetto, sorgenti e compilato si troverà nella directory:
-  
+  ~/architech_sdk/architech/pengwyn/yocto/build/tmp/work/cortexa8t2hf-vfp-neon-poky-linux-gnueabi/tslib/1.1-r0/sysroot-destdir/usr/
 
 QT
 ==
@@ -38,15 +38,14 @@ include(../../common/g++-unix.conf)
 include(../../common/qws.conf)
 
 # modifications to g++.conf
-QMAKE_CC                = arm-poky-linux-gnueabi-gcc --sysroot=/home/architech/architech_sdk/architech/pengwyn/toolchain/sysroots/cortexa8t2hf-vfp-neon-poky-linux-gnueabi
-QMAKE_CXX               = arm-poky-linux-gnueabi-g++ --sysroot=/home/architech/architech_sdk/architech/pengwyn/toolchain/sysroots/cortexa8t2hf-vfp-neon-poky-linux-gnueabi
+QMAKE_CC                = arm-poky-linux-gnueabi-gcc -mfloat-abi=hard -mfpu=neon -mtune=cortex-a8 --sysroot=/home/architech/architech_sdk/architech/pengwyn/toolchain/sysroots/cortexa8t2hf-vfp-neon-poky-linux-gnueabi
+QMAKE_CXX               = arm-poky-linux-gnueabi-g++ -mfloat-abi=hard -mfpu=neon -mtune=cortex-a8 --sysroot=/home/architech/architech_sdk/architech/pengwyn/toolchain/sysroots/cortexa8t2hf-vfp-neon-poky-linux-gnueabi
 QMAKE_LINK              = arm-poky-linux-gnueabi-g++ --sysroot=/home/architech/architech_sdk/architech/pengwyn/toolchain/sysroots/cortexa8t2hf-vfp-neon-poky-linux-gnueabi
 QMAKE_LINK_SHLIB        = arm-poky-linux-gnueabi-g++ --sysroot=/home/architech/architech_sdk/architech/pengwyn/toolchain/sysroots/cortexa8t2hf-vfp-neon-poky-linux-gnueabi
 
 QMAKE_CFLAGS_RELEASE = -O3 -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=hard
-QMAKE_INCDIR += /home/architech/qt/tslib-1.0/src
-QMAKE_LIBDIR += /home/architech/qt/tslib-1.0/lib
-
+QMAKE_INCDIR += /home/architech/architech_sdk/architech/pengwyn/yocto/build/tmp/work/cortexa8t2hf-vfp-neon-poky-linux-gnueabi/tslib/1.1-r0/sysroot-destdir/usr/include/
+QMAKE_LIBDIR += /home/architech/architech_sdk/architech/pengwyn/yocto/build/tmp/work/cortexa8t2hf-vfp-neon-poky-linux-gnueabi/tslib/1.1-r0/sysroot-destdir/usr/lib
 
 # modifications to linux.conf
 QMAKE_AR                = arm-poky-linux-gnueabi-ar cqs
