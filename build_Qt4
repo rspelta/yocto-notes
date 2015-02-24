@@ -64,5 +64,13 @@ NB: QMAKE_CFLAGS_RELEASE non so se lo usa, cmq QMAKE_CC e QMAKE_CXX devono avere
   - tibidabo: (da ritestare) ./configure -no-pch -opensource -confirm-license -prefix /usr/local/Trolltech/Tibidabo -no-qt3support -embedded arm -nomake examples -nomake demo -little-endian -qt-kbd-linuxinput -qt-mouse-tslib -qt-mouse-linuxinput -xplatform qws/linux-tibidabo-g++ -qtlibinfix E
   NB: Appena dato il comando deve iniziare a compilare per x86 non per ARM
 
-7. Compila le qt a velocità smodata
-  make -j X
+7. Durante la compilazione cercherà le librerie tslib ma non le troverà come se QMAKE_INCDIR e QMAKE_LIBDIR fossero inutili. Per ovviare a questo problema copiare direttamente i binari delle tslib nella sysroot vista dal compilatore:
+   cd /home/architech/architech_sdk/architech/pengwyn/yocto/build/tmp/work/cortexa8t2hf-vfp-neon-poky-linux-gnueabi/tslib/1.1-r0/sysroot-destdir/
+   cp -r usr/ ~/architech_sdk/architech/pengwyn/toolchain/sysroots/cortexa8t2hf-vfp-neon-poky-linux-gnueabi/
+   Non è il massimo, se si vogliono fare le cose pulite usare la sysroot /home/architech/architech_sdk/architech/<board>/sysroot, adattando anche il qmake.conf
+
+8. Compila le qt a velocità smodata
+   make -j X
+
+9. Installa sulla macchina:
+   sudo make install
