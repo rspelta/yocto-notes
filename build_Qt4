@@ -31,8 +31,8 @@ PREPARARE LA CROSS-TOOLCHAIN
   export PATH=${PATH}:/home/architech/architech_sdk/architech/pengwyn/toolchain/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/
 
 
-COMPILARE LE QT
-===============
+COMPILARE LE QT 4.8.6
+=====================
 
 1. Scaricare qt-everywhere-opensource-src-4.8.6.tar.gz, non lo zip perchè i file sono salvati in fomrato di windows.
   axel http://download.qt.io/official_releases/qt/4.8/4.8.6/qt-everywhere-opensource-src-4.8.6.tar.gz
@@ -56,10 +56,10 @@ include(../../common/g++-unix.conf)
 include(../../common/qws.conf)
 
 # modifications to g++.conf
-QMAKE_CC                = arm-poky-linux-gnueabi-gcc -mfloat-abi=hard -mfpu=neon -mtune=cortex-a8 --sysroot=/home/architech/architech_sdk/architech/pengwyn/toolchain/sysroots/cortexa8t2hf-vfp-neon-poky-linux-gnueabi
-QMAKE_CXX               = arm-poky-linux-gnueabi-g++ -mfloat-abi=hard -mfpu=neon -mtune=cortex-a8 --sysroot=/home/architech/architech_sdk/architech/pengwyn/toolchain/sysroots/cortexa8t2hf-vfp-neon-poky-linux-gnueabi
-QMAKE_LINK              = arm-poky-linux-gnueabi-g++ --sysroot=/home/architech/architech_sdk/architech/pengwyn/toolchain/sysroots/cortexa8t2hf-vfp-neon-poky-linux-gnueabi
-QMAKE_LINK_SHLIB        = arm-poky-linux-gnueabi-g++ --sysroot=/home/architech/architech_sdk/architech/pengwyn/toolchain/sysroots/cortexa8t2hf-vfp-neon-poky-linux-gnueabi
+QMAKE_CC                = arm-poky-linux-gnueabi-gcc -mfloat-abi=hard -mfpu=neon -mtune=cortex-a8 --sysroot=/home/architech/architech_sdk/architech/pengwyn/sysroot
+QMAKE_CXX               = arm-poky-linux-gnueabi-g++ -mfloat-abi=hard -mfpu=neon -mtune=cortex-a8 --sysroot=/home/architech/architech_sdk/architech/pengwyn/sysroot
+QMAKE_LINK              = arm-poky-linux-gnueabi-g++ --sysroot=/home/architech/architech_sdk/architech/pengwyn/sysroot
+QMAKE_LINK_SHLIB        = arm-poky-linux-gnueabi-g++ --sysroot=/home/architech/architech_sdk/architech/pengwyn/sysroot
 
 QMAKE_CFLAGS_RELEASE = -O3 -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=hard
 QMAKE_INCDIR += /home/architech/architech_sdk/architech/pengwyn/yocto/build/tmp/work/cortexa8t2hf-vfp-neon-poky-linux-gnueabi/tslib/1.1-r0/sysroot-destdir/usr/include/
