@@ -1,0 +1,114 @@
+PENGWYN 2/2015
+
+Capitolo 2.3 Deploy ci sono due paragrafi che mi sembrano ripetitivi, verificare...
+
+2.3.1. How to create the SD card
+2.3.2. How to build the SD card
+
+
+CAPITOLO 5.1.1 correggere path: (FATTO)
+
+2014.07-r7+gitrAUTOINC+7e537bfdd2
+
+/home/architech/architech_sdk/architech/pengwyn/yocto/build/tmp/work/pengwyn-poky-linux-gnueabi/u-boot-ti-staging/2013.10-r8/git/
+
+Capitolo 5.1.1, correggere la versione ed il checkout: (DA FARE)
+
+cd /home/architech/Documents
+git clone -b ti-u-boot-2013.10 git://git.ti.com/ti-u-boot/ti-u-boot.git
+mv ti-u-boot u-boot
+cd u-boot
+git checkout 78d8ebd4a0214b72a125f5b98c5ed2f9a3e5e783
+
+
+Capitolo 5.1.2 Correggere path (FATTO)
+
+patch -p1 -d /home/architech/Documents/u-boot < /home/architech/architech_sdk/architech/pengwyn/yocto/meta-pengwyn/recipes-bsp/u-boot/u-boot-ti-staging-2013.10/0001-pengwyn.patch
+
+con:
+
+2014.07-r7+gitrAUTOINC+7e537bfdd2
+
+Capitolo 5.1.2 non c'è il file: (DA VERIFICARE)
+
+/home/architech/Documents/u-boot/include/configs/pengwyn.h
+
+Capitolo 5.2 correggere path: (FATTO)
+
+/path/to/build/tmp/work/pengwyn-poky-linux-gnueabi/linux-ti-staging/3.12.17-r22a/git
+
+con
+
+sitara-linux-ti-staging/3.14.26-r22g+gitrAUTOINC+2489c022b2/git
+
+e  (FATTO)
+
+/home/architech/architech_sdk/architech/pengwyn/yocto/build/tmp/work/pengwyn-poky-linux-gnueabi/linux-ti-staging/3.12.17-r22a+XXX/git
+
+analogamente
+
+Capitolo 5.2 controllare versione da clonare e checkout (DA FARE)
+
+cd ~/Documents
+git clone git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git
+cd ti-linux-kernel
+git checkout f0d4672333685697320f4907d5b4d3919121c299
+
+e (DA FARE)
+
+cd ~/Documents
+patch -p1 -d ti-linux-kernel/ < /home/architech/architech_sdk/architech/pengwyn/yocto/meta-pengwyn/recipes-kernel/linux/linux-ti-staging-3.12.17/0002-pengwyn.patch
+cp /home/architech/architech_sdk/architech/pengwyn/yocto/meta-pengwyn/recipes-kernel/linux/linux-ti-staging-3.12.17/defconfig ti-linux-kernel/arch/arm/configs/pengwyn_defconfig
+
+
+Capitolo 5.2 non trova il branch  (NON ESISTE ANCORA!!!!!!!!!!!!!!!!!!!! USARE IL COMMIT PRESENTE NEL FILE XML DI INSTALLAZIONE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)
+
+git clone -b dizzy git://git.yoctoproject.org/meta-ti.git
+
+Remote branch dizzy not found in upstream origin
+
+e vanno comunque corretti i path: (FATTO)
+
+meta-pengwyn/recipes-kernel/linux/linux-ti-staging-3.12.17
+
+con
+
+meta-pengwyn/recipes-kernel/linux/sitara-linux-ti-staging-3.14.26
+
+e (FATTO)
+
+cp meta-pengwyn/recipes-kernel/linux/linux-ti-staging-3.12.17/defconfig ti-linux-kernel/arch/arm/configs/pengwyn_defconfig
+
+con
+
+cp meta-pengwyn/recipes-kernel/linux/sitara-linux-ti-staging-3.14.26/defconfig ti-linux-kernel/arch/arm/configs/pengwyn_defconfig
+
+NON POSSO CONTROLLARE I PATH CLONATI CON ti-linux-kernel
+
+probabilmente devi sostituirli tutti con
+
+sitara-linux-ti-staging
+
+Capitolo 5.3
+
+OK
+
+Capitolo 6 
+
+HOB
+
+OK
+
+capitolo 6.4 QT frame work (FATTO)
+
+sostituire i file zip con i tar
+
+ qt-everywhere-opensource-src-4.8.6.tar.gz
+e
+tar -zxf qt-everywhere-opensource-src-4.8.6.tar.gz 
+
+
+
+
+
+

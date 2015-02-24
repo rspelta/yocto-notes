@@ -1,0 +1,11 @@
+Procedura di collaudo della Virtual Machine Architech
+=====================================================
+
+1. Installare il pacchetto "cifs-utils":
+	sudo apt-get install cifs-utils
+2. Accedere alla cartella di downloads del server RSR con il comando:
+	mkdir -p /home/architech/architech_sdk/architech/downloads
+	sudo mount.cifs //126.126.126.42/backup/architech_sdk/download /home/architech/architech_sdk/architech/downloads -o rw,user="UTENTE",password="PASSWD"
+3. Assicurarsi che si può accedere anche in internet
+4. seguire la documentazione ma modificare il file local.conf aggiungendo infondo al file la seguente variable:
+	DL_DIR = "/home/architech/architech_sdk/downloads"

@@ -1,0 +1,34 @@
+PROCEDURA DI INSTALLAZIONE DI UNA VM
+====================================
+
+*** Aggiornare se necessario il server cache ***
+Qui è indicato cosa installare/rimuovere su una virtual machine pulita per creare una macchina di sviluppo architech.
+Da vedere poi il file per la procedura di collaudo.
+
+0. Installare "sudo apt-get install git-core", è l'unico pacchetto necessario da installare manualmente.
+1. Settare git con i comandi:
+   git config --global user.email "you@example.com"
+   git config --global user.name "Your Name"
+2. Settare il gnome-terminal con lo scrolling infinito. Questo servirà per avere il log completo dell'installazione.
+3. Creare in home il file "url_download" e inserire la riga:
+   http://126.126.126.127:4080/
+4. Tramite "machine_installer -g -p" si installa la macchina con tutte le boards.
+5. Selezionare tutto il log del terminale e copiarlo in un file. Questo per verificare se ci sono stati problemi durante l'installazione.
+6. Settare gedit con i numeri di linea, i tab a 4 spazi ed eliminare la creazione dei
+7. Se si fanno modifiche ai repository git ricordarsi di cambiare le impostazioni con il comando:
+   git config --global user.name "Nome Utente"
+8. settare la passwd della root: "root"
+9. Eliminato il lock dello screensaver, non chiede più la password
+10. Installare gparted e meld
+11. Eliminare UbuntuOne, giochi, Libre Office, Photo manager, simple scan, Gwibber social client, Thunderbird mail, bittorrent
+12. Ripulire firefox, cestino
+13. L'icona dello splashscreen metterlo anche nel menu verticale a sinistra
+14. verificare che la cartella condivisa funzioni con i permessi corretti (sudo usermod -a -G vboxsf architech) riavviare dopo il comando
+15. rimuovere la cartella machine_installer
+16. sudo apt-get autoremove, per rimuovere i pacchetti non più utilizzati
+17. Ripulire filesystem con "dd if=/dev/zero of=bigdata"
+18. eliminare in media la cartella RSR
+19. eliminare il file ~/url_download
+20. ripulire history commands (history -c && history -w )
+21. Comprimere vdi con "vboxmanage modifyhd --compact architech-sdk.vdi"
+22. Zip del file VDI
