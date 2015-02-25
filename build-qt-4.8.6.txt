@@ -1,7 +1,7 @@
 QT 4.8.6
 ========
 
-DA RIFARE!!!! spostare le librerie TSLIB in /usr!!
+DA RIFARE!!!! spostare le librerie TSLIB in /usr!! provare librerie statiche
 
 Siti di riferimento:
 - http://qt-project.org/forums/viewthread/38665
