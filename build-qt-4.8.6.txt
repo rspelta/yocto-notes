@@ -1,6 +1,8 @@
 QT 4.8.6
 ========
 
+DA RIFARE!!!! spostare le librerie TSLIB in /usr!!
+
 Siti di riferimento:
 - http://qt-project.org/forums/viewthread/38665
 - https://chaitramohankumar.wordpress.com/2014/08/13/building-qt4-8-6-for-embedded-linux/
