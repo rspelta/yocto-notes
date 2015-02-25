@@ -1,5 +1,45 @@
 DEVICETREE
 ==========
 
+work in progress...
+
 video:      https://www.youtube.com/watch?v=m_NyYEBxfn8
 esempio:    http://xillybus.com/tutorials/device-tree-zynq-1
+http://www.devicetree.org/Device_Tree_Usage
+http://lxr.free-electrons.com/source/Documentation/arm/Booting
+
+http://lxr.free-electrons.com/source/Documentation/devicetree/booting-without-of.txt
+======================
+There is one single entry point to the kernel, at the start of the kernel image, That entry point supports two calling conventions.
+a) ATAGS interface. (non descritta)
+b) Entry with a flattened device-tree block.
+r0 : 0
+r1 : Valid machine type number.
+r2 : physical pointer to the device-tree block in RAM. It should be aligned on a 64 bit boundary.
+
+It's basically a tree of nodes, each node having two or more named properties. A property can have a value or not.
+It is a tree, so each node has one and only one parent except for the root node who has no parent.
+A node has 2 names:
+1. The "actual node" name is generally contained in a property of type "name" in the node property list whose value is a zero terminated string and is optional
+2. "unit name" that is used to differentiate nodes with the same name at the same level, it is usually made of the node names, the "@" sign, and a "unit address" (usato solo per avere l'unicità del nodo)
+
+The unit name is used to define a node "full path", which is the concatenation of all parent node unit names separated with "/".
+
+Every node which ACTUALLY represents an actual device is also required to have a "compatible" property indicating the  specific hardware and an optional list of devices it is fully backwards compatible with.
+
+Every node that can be referenced from a property in another node is required to have either a "phandle" or a "linux,phandle" property. The "phandle" property is a 32-bit value that uniquely identifies a node.
+
+the kernel does not require every single device or bus to be described by the device tree.
+
+Most 32-bit implementations should define address-cells and #size-cells to 1, which represents a 32-bit value. Some 32-bit processors allow for physical addresses greater than 32 bits; these processors should define #address-cells as 2.
+
+
+
+http://lxr.free-electrons.com/source/Documentation/devicetree/usage-model.txt
+===============
+
+Al boot del kernel arm con il device tree, la funzione "setup_arch" in "arch/arm/kernel/setup.c" chiama la funzione "setup_machine_fdt" in "arch/arm/kernel/devtree.c", in cui questa verifica tutti i "dt_compat" (definito nella struttura "machine_desc" vedi in "arch/arm/include/asm/mach/arch.h") delle macchine definite in "arch/arm/" per trovare la stringa uguale (es "fsl,imx6q" definito nel devicetree usato in fase di boot), da cui poi utilizzerà per fare il boot specifico per la macchina.
+
+
+http://lxr.free-electrons.com/source/Documentation/devicetree/of_selftest.txt
+===============
