@@ -9,3 +9,8 @@ MICROZED & ZEDBOARD
    Il problema è l'eseguibile "patchme" chiamato dalla funzione do_patch. facendo:
     bitbake virtual/kernel -c compile -e > log.txt
    e cercando la funzione phyton "do_patch" si troverà il nome dell'eseguibile "patchme". Questo genera il problema.
+
+PENGWYN
+=======
+1. Le immagini sato non vengono compilate
+2. L'environment della toolchain setta in modo errato la variabile target della sysroot
