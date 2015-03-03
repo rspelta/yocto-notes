@@ -1,6 +1,8 @@
 QT 4.8.6
 ========
 
+Nota: packagegroup-core-qt4e dovrebbe incorporare le TSLIB
+
 * Compilare
 meta-toolchain-qte
 
