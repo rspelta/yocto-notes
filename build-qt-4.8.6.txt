@@ -1,6 +1,32 @@
 QT 4.8.6
 ========
 
+* Compilare
+meta-toolchain-qte
+
+* Installazione
+./poky-glibc-i686-meta-toolchain-qte-cortexa8t2hf-vfp-neon-toolchain-qte-1.7.1.sh
+
+* Lanciare qt-creator
+source /opt/poky/1.7.1/environment-setup-cortexa8t2hf-vfp-neon-poky-linux-gnueabi
+source /opt/poky/1.7.1/sysroots/i686-pokysdk-linux/environment-setup.d/qtopia.sh
+
+impostazioni:
+General ->
+	Directory: /home/architech/architech_sdk/architech/pengwyn/workspace/qt
+Kits ->
+	Desktop: Desktop
+	Device type: Generic Linux Device
+	Device: Pengwyn device
+	Sysroot: /opt/poky/1.7.1/sysroots/cortexa8t2hf-vfp-neon-poky-linux-gnueabi
+	Debugger: /opt/poky/1.7.1/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi-gdb
+Qt Versions ->
+	Qt 4.8.5 in PATH (System): /opt/poky/1.7.1/sysroots/i686-pokysdk-linux/usr/bin/qmake
+Compilers ->
+	GCC arm: /opt/poky/1.7.1/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi-addr2line
+
++++++++++++++++++++++++++++++++++++++++++++
+
 DA RIFARE!!!! spostare le librerie TSLIB in /usr!! provare librerie statiche
 
 Siti di riferimento:
