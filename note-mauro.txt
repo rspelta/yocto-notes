@@ -4,7 +4,7 @@ PENGWYN 2/2015
 * Il kernel linux è cambiato, per compilare manualmente usare questi comandi:
 git clone -b sitara-ti-linux-3.14.y git://git.ti.com/sitara-linux/sitara-linux.git
 cd sitara-linux
-git checkout 99b50bfb0f3fb0e43de31a6735989d31660b0835
+git checkout 2489c022b2932432606f897741a71b712e6dbe77
 patch -p1 -d sitara-linux/ < /home/architech/architech_sdk/architech/pengwyn/yocto/meta-pengwyn/recipes-kernel/linux/sitara-linux-ti-staging-3.14.26/0002-pengwyn.patch
 
 * L'u-boot è cambiato, per compilare manualmente usare i seguenti comandi:
