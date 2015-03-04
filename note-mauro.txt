@@ -7,6 +7,7 @@ cd sitara-linux
 git checkout 2489c022b2932432606f897741a71b712e6dbe77
 patch -p1 -d sitara-linux/ < /home/architech/architech_sdk/architech/pengwyn/yocto/meta-pengwyn/recipes-kernel/linux/sitara-linux-ti-staging-3.14.26/0002-pengwyn.patch
 cp ~/architech_sdk/architech/pengwyn/yocto/meta-pengwyn/recipes-kernel/linux/sitara-linux-ti-staging-3.14.26/defconfig ~/Documents/sitara-linux/arch/arm/configs/pengwyn_defconfig
+source /home/architech/architech_sdk/architech/pengwyn/toolchain/environment-nofs
 make pengwyn_defconfig
 make -j 4
 
