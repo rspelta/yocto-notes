@@ -6,6 +6,11 @@ git clone -b sitara-ti-linux-3.14.y git://git.ti.com/sitara-linux/sitara-linux.g
 cd sitara-linux
 git checkout 99b50bfb0f3fb0e43de31a6735989d31660b0835
 
+* L'u-boot è cambiato, per compilare manualmente usare i seguenti comandi:
+git clone -b ti-u-boot-2014.07 git://git.ti.com/ti-u-boot/ti-u-boot.git
+cd ti-u-boot/
+git checkout 7e537bfdd261bf8bf444f3ac4d1be3db4ee124e8
+
 ----------------------------------------------------------------------------------------
 
 Capitolo 2.3 Deploy ci sono due paragrafi che mi sembrano ripetitivi, verificare...
