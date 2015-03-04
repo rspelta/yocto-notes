@@ -6,6 +6,9 @@ git clone -b sitara-ti-linux-3.14.y git://git.ti.com/sitara-linux/sitara-linux.g
 cd sitara-linux
 git checkout 2489c022b2932432606f897741a71b712e6dbe77
 patch -p1 -d sitara-linux/ < /home/architech/architech_sdk/architech/pengwyn/yocto/meta-pengwyn/recipes-kernel/linux/sitara-linux-ti-staging-3.14.26/0002-pengwyn.patch
+cp ~/architech_sdk/architech/pengwyn/yocto/meta-pengwyn/recipes-kernel/linux/sitara-linux-ti-staging-3.14.26/defconfig ~/Documents/sitara-linux/arch/arm/configs/pengwyn_defconfig
+make pengwyn_defconfig
+make -j 4
 
 * L'u-boot è cambiato, per compilare manualmente usare i seguenti comandi:
 git clone -b ti-u-boot-2014.07 git://git.ti.com/ti-u-boot/ti-u-boot.git
