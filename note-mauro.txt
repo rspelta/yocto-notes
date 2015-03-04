@@ -5,12 +5,16 @@ PENGWYN 2/2015
 git clone -b sitara-ti-linux-3.14.y git://git.ti.com/sitara-linux/sitara-linux.git
 cd sitara-linux
 git checkout 99b50bfb0f3fb0e43de31a6735989d31660b0835
+patch -p1 -d sitara-linux/ < /home/architech/architech_sdk/architech/pengwyn/yocto/meta-pengwyn/recipes-kernel/linux/sitara-linux-ti-staging-3.14.26/0002-pengwyn.patch
 
 * L'u-boot è cambiato, per compilare manualmente usare i seguenti comandi:
 git clone -b ti-u-boot-2014.07 git://git.ti.com/ti-u-boot/ti-u-boot.git
 cd ti-u-boot/
 git checkout 7e537bfdd261bf8bf444f3ac4d1be3db4ee124e8
-
+patch -p1 -d ti-u-boot/ < /home/architech/architech_sdk/architech/pengwyn/yocto/meta-pengwyn/recipes-bsp/u-boot/u-boot-ti-staging-2014.07/0001-pengwyn.patch
+source /home/architech/architech_sdk/architech/pengwyn/toolchain/environment-nofs
+cd ti-u-boot/
+make pengwyn_config
 ----------------------------------------------------------------------------------------
 
 Capitolo 2.3 Deploy ci sono due paragrafi che mi sembrano ripetitivi, verificare...
