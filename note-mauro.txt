@@ -1,5 +1,13 @@
 PENGWYN 2/2015
 
++++ MODIFICHE +++
+* Il kernel linux è cambiato, per compilare manualmente usare questi comandi:
+git clone -b sitara-ti-linux-3.14.y git://git.ti.com/sitara-linux/sitara-linux.git
+cd sitara-linux
+git checkout 99b50bfb0f3fb0e43de31a6735989d31660b0835
+
+----------------------------------------------------------------------------------------
+
 Capitolo 2.3 Deploy ci sono due paragrafi che mi sembrano ripetitivi, verificare...
 
 2.3.1. How to create the SD card
