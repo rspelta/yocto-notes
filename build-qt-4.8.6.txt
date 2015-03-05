@@ -13,6 +13,8 @@ meta-toolchain-qte
 source /opt/poky/1.7.1/environment-setup-cortexa8t2hf-vfp-neon-poky-linux-gnueabi
 source /opt/poky/1.7.1/sysroots/i686-pokysdk-linux/environment-setup.d/qtopia.sh
 
+* L'immagine deve avere le tslib installate
+
 impostazioni:
 General ->
 	Directory: /home/architech/architech_sdk/architech/pengwyn/workspace/qt
