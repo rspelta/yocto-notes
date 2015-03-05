@@ -3,6 +3,10 @@ QT 4.8.6
 
 Nota: packagegroup-core-qt4e dovrebbe incorporare le TSLIB
 
+* per le qt4e-demo-image aggiungere anche:
+IMAGE_INSTALL_append = " tslib tslib-conf tslib-tests tslib-calibrate"
+per avere il touchscreen
+
 * Compilare
 meta-toolchain-qte
 
