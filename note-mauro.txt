@@ -1,6 +1,8 @@
 PENGWYN 2/2015
 
 +++ MODIFICHE +++
+* il bootloader dovrebbe caricare di default il file "am335x-pengwyn.dtb" (da riprovare con la yocto build)
+
 * Il kernel linux è cambiato, per compilare manualmente usare questi comandi:
 git clone -b sitara-ti-linux-3.14.y git://git.ti.com/sitara-linux/sitara-linux.git
 cd sitara-linux
