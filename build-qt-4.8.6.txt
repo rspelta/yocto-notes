@@ -11,7 +11,8 @@ per avere il touchscreen
 meta-toolchain-qte
 
 * Installazione
-./poky-glibc-i686-meta-toolchain-qte-cortexa8t2hf-vfp-neon-toolchain-qte-1.7.1.sh
+sudo ./poky-glibc-i686-meta-toolchain-qte-cortexa8t2hf-vfp-neon-toolchain-qte-1.7.1.sh
+sudo chown -R architech:architech ~/architech_sdk/architech/pengwyn/toolchain/
 
 * Lanciare qt-creator
 source /opt/poky/1.7.1/environment-setup-cortexa8t2hf-vfp-neon-poky-linux-gnueabi
