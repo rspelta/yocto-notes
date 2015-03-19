@@ -1,0 +1,50 @@
+La documentazione Architech
+===========================
+
+Siti utilizzati:
+- github        - server dove risiede la documentazione
+- readthedocs   - server dove viene pubblicata la documentazione
+
+La documentazione di ogni scheda fa riferimento ai repository su github:
+1. https://github.com/architech-boards/documentation-template.git
+contiene le parti di documentazione utilizzate da tutte le documentazioni di tutte le schede.
+
+2. https://github.com/architech-boards/<NOME SCHEDA>-customization.git
+contiene le parti specifiche di documentazione delle schede
+
+3. https://github.com/architech-boards/<NOME SCHEDA>-documentation.git
+è la documentazione prodotta dall'unione delle due documentazioni sopra citate. Questo repository viene utilizzato per pubblicare la documentazione.
+Deve contenere i seguenti file:
+./source    - directory con tutti i file .rst
+./Makefile
+./README.md
+./make.bat
+
+Ognuno di questi repository ha dei rami nominati in base alla versione di yocto, in ordine temporale Dylan, Dora, Dizzy. Mantenere l'ordine delle versioni utilizzando esclusivamente il nome della versione di Yocto.
+
+
+Pubblicare il sito
+------------------
+
+Andare sul sito readthedocs, utilizzare l'utente "rsr". Eseguire le sequenti operazioni:
+1. clicca su "Import a project" e poi su "manually import project"
+2. su "Name:" mettere "architechboards-<NOME SCHEDA>"
+3. su "Repository URL:" inserire la url del tipo "https://github.com/architech-boards/<NOME SCHEDA>-documentation.git"
+4. andare su "Advanced Settings" e su "Default branch:" scegliere il ramo che deve utilizzare del repository <NOME SCHEDA>-documentation.git
+5. andare su "Builds" e creare la documentazione
+
+Se si deve aggiornare la documentazione con una versione nuova allora fare così:
+Poniamo che:
+A versione vecchia
+B versione nuova
+
+1. Creare un nuovo progetto su readthedocs che abbia però come:
+    "Name:" architechboards-<NOME SCHEDA>-VersioneA
+    "Repository URL:" "https://github.com/architech-boards/<NOME SCHEDA>-documentation.git"
+    e come ramo la versione A
+
+2. Andare nelle impostazioni del progetto vecchio A e inserire il nome, la url e il branch della versione nuova B
+
+3. Fare il build di entrambe le versioni.
+
+Nota: ricordarsi che la documentazione nuova B deve avere il link alla documentazione precedente versione A
