@@ -7,16 +7,28 @@ Nota: packagegroup-core-qt4e dovrebbe incorporare le TSLIB
 IMAGE_INSTALL_append = " tslib tslib-conf tslib-tests tslib-calibrate"
 per avere il touchscreen
 
-* Compilare
-meta-toolchain-qte
+Fase 1 - Testare la toolchain
+=============================
 
-* Installazione
+1. Compilare la toolchain per le qt embedded
+bitbake meta-toolchain-qte
+
+2. Installarla
 sudo ./poky-glibc-i686-meta-toolchain-qte-cortexa8t2hf-vfp-neon-toolchain-qte-1.7.1.sh
 sudo chown -R architech:architech ~/architech_sdk/architech/pengwyn/toolchain/
 
-* Lanciare qt-creator
+3. Lanciare qt-creator, ma prima lanciare questi:
 source /opt/poky/1.7.1/environment-setup-cortexa8t2hf-vfp-neon-poky-linux-gnueabi
 source /opt/poky/1.7.1/sysroots/i686-pokysdk-linux/environment-setup.d/qtopia.sh
+
+4. Provare a creare una applicazione qt e lanciarla sulla board facendo il debug
+
+5. Provare a creare una applicazione con eclipse e lanciarla sulla board facendo il debug
+
+6. Provare a compilare il kernel e il bootloader ed testare se funzionano
+
+Fase 2 - Inserirla nell'installazione
+=====================================
 
 * L'immagine deve avere le tslib installate
 
