@@ -1,14 +1,8 @@
 QT 4.8.6
 ========
 
-Nota: packagegroup-core-qt4e dovrebbe incorporare le TSLIB
-
-* per le qt4e-demo-image aggiungere anche:
-IMAGE_INSTALL_append = " tslib tslib-conf tslib-tests tslib-calibrate"
-per avere il touchscreen
-
-Fase 1 - Testare la toolchain
-=============================
+Fase 1 - Testare la cross-toolchain qt
+======================================
 
 1. Compilare la toolchain per le qt embedded
 bitbake meta-toolchain-qte
@@ -27,8 +21,29 @@ source /opt/poky/1.7.1/sysroots/i686-pokysdk-linux/environment-setup.d/qtopia.sh
 
 6. Provare a compilare il kernel e il bootloader ed testare se funzionano
 
+7. Se la board lo prevedede testare le qtdemo utilizzando anche il touchscreen, ricordarsi di creare l'immagine qt4e-demo-image con questa linea da mettere in local.conf
+IMAGE_INSTALL_append = " tslib tslib-conf tslib-tests tslib-calibrate tcf-agent gdbserver"
+
 Fase 2 - Inserirla nell'installazione
 =====================================
+
+Lo script di installazione della board si trova nel repository:
+
+- https://github.com/architech-boards/<NOME BOARD>-splashscreen.git
+
+Questo script ha due funzioni
+- installare da zero yocto, cross-toolchain, eclipse, qtcreator e documentazione
+- eseguire aggiornamenti
+
+Lo script scarica e installa i file prendendoli dal server DigitalOcean, quindi se si vuole aggiungere la toolchain bisogna inserirlo sul server.
+Nel server abbiamo una struttura del tipo:
+<NOME SCHEDA>/toolchain/<VERSIONE YOCTO>/
+In questa directory si trova il file 'version' e una o più cartelle numerate 1,2,3,...
+Nel file 'version' cè il numero della cartella dell'ultima toolchain che deve essere installata dallo script di installazione.
+Per esempio se avessimo le cartelle '1', '2', '3', '4' e nel file 'version' il numero '3' lo script di installazione installerà in ordine la toolchain della cartella 1 fino alla 3 compresa.
+Nella cartella dove si trova la toolchain si hanno 2 file:
+- 01.tar.gz	- toolchain da installare
+- toolchain.txt	- contiene il nome del file da scaricare senza le estensioni e il suo md5sum esempio "01 1acc2a2ee2380a75b91a985edc4dfc49"
 
 * L'immagine deve avere le tslib installate
 
