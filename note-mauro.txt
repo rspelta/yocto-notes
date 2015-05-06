@@ -1,3 +1,12 @@
+ZEDBOARD
+
+- testare kernel
+- testare bootloader
+- testare qt
+- testare eclipse
+
+- per compilare le qt4-demo-image rimuovere le bluez dal local.conf
+
 PENGWYN 2/2015
 
 +++ MODIFICHE +++
