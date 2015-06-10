@@ -1,3 +1,9 @@
+MODIFICARE L'UUID
+=================
+Se si vuole creare una seconda macchina virtuale con il clone di una vdi VBox lo impedisce perchè i due file vdi hanno lo stesso UUID, la soluzione è cambiare a uno dei file vdi l'ID con questo comando:
+
+VBoxManage internalcommands sethduuid immagine.vdi
+
 APRIRE UN VDI
 =============
 
