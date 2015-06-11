@@ -1,0 +1,30 @@
+CONNETTERSI IN INTERNET CON CHIAVETTE USB
+=========================================
+Gli ISP mobile non forniscono l'indirizzo IP remoto,è possibile accedere ai server in internet ma dall'esterno non è possibile connettersi a un cellulare, serve una sim con dei privilegi particolari.
+Il programma wvdialconf permette di conoscere come configurare il proprio modem.
+E' necessario il software "pppd" per connettersi in internet.
+Per fare il debug bisogna usare il comando
+cat /dev/ttyUSB0 &
+poi eseguire questo script per connettersi:
+
+#!/bin/sh
+set -x
+echo -e "AT" > /dev/ttyUSB0
+sleep 1
+echo -e "ATH" > /dev/ttyUSB0
+sleep 1
+echo -e "ATZ" > /dev/ttyUSB0
+sleep 1
+echo -e "ATQ0 V1 E1 S0=0" > /dev/ttyUSB0
+sleep 1
+echo -e "AT+CGDCONT=1,\"IP\",\"Your APN name\"" > /dev/ttyUSB0
+oppure
+echo -e "AT+IPINIT=\"Your APN name\",\"username\",\"password\"" > /dev/ttyUSB0
+sleep 1
+echo -e "ATDT*99#" > /dev/ttyUSB0
+sleep 1
+pppd ttyUSB0 115200 nodetach noauth lock usepeerdns &
+sleep 10
+route add default ppp0
+#route add default gw 10.64.64.64 ppp0
+echo MODEM CONNECTED
