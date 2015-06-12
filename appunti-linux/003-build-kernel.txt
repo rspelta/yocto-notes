@@ -1,5 +1,6 @@
 BUILD KERNEL
 ============
+per il menu config serve installare "sudo apt-get install libncurses5-dev"
 
 ARCH=arm CROSS_COMPILE=arm-poky-linux-gnueabi- make menuconfig                                          - opzioni kernel scritte poi nel .config
 ARCH=arm CROSS_COMPILE=arm-poky-linux-gnueabi- make mrproper                                            - pulisce tutto
