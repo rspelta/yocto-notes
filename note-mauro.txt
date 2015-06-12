@@ -6,6 +6,11 @@ ZEDBOARD
 - testare eclipse
 
 - per compilare le qt4-demo-image rimuovere le bluez dal local.conf
+- nella compilazione del kernel manca la copia del devicetree dts:
+cp meta-zedboard/conf/machine/boards/zedboard/zedboard.dtsi linux-xlnx/arch/arm/boot/dts
+cp meta-zedboard/conf/machine/boards/zedboard/zedboard-mmcblk0p2.dts linux-xlnx/arch/arm/boot/dts
+cp meta-zedboard/conf/machine/boards/zedboard/zedboard-ram.dts linux-xlnx/arch/arm/boot/dts
+e poi la spiegazione di come generare il file .dtb
 
 PENGWYN 2/2015
 
