@@ -11,6 +11,14 @@ cp meta-zedboard/conf/machine/boards/zedboard/zedboard.dtsi linux-xlnx/arch/arm/
 cp meta-zedboard/conf/machine/boards/zedboard/zedboard-mmcblk0p2.dts linux-xlnx/arch/arm/boot/dts
 cp meta-zedboard/conf/machine/boards/zedboard/zedboard-ram.dts linux-xlnx/arch/arm/boot/dts
 e poi la spiegazione di come generare il file .dtb
+- per testare le qt scaricare i binari da:
+  http://www.logicbricks.com/logicBRICKS/Reference-logicBRICKS-Design/Xylon-Reference-Designs-Navigation-Page.aspx
+  il jar installer "logiREF-ZGPU-ZED Graphics Processing Unit (April 24, 2015)"
+  il comandi di boot sono:
+  $> setenv bootargs "console=ttyPS0,115200 root=/dev/mmcblk0p2 rw earlyprintk rootwait"
+  $> fatload mmc 0 0x3000000 uImage
+  $> fatload mmc 0 0x2A00000 devicetree.dtb
+  $> bootm 0x3000000 - 0x2A00000
 
 PENGWYN 2/2015
 
