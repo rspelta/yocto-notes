@@ -19,6 +19,7 @@ e poi la spiegazione di come generare il file .dtb
   $> fatload mmc 0 0x3000000 uImage
   $> fatload mmc 0 0x2A00000 devicetree.dtb
   $> bootm 0x3000000 - 0x2A00000
+utilizzare il kernel uImage, boot.bin, devicetree.dtb dal progetto zedboard-fb/boot-apr2015 su github rspelta, quei file vanno messi dentro poi nella documentazione! Metti dentro anche il dts che è il sorgente del devicetree caso mai volessero dare un'occhiata per il resto digli di andare sul sito logicbricks
 
 PENGWYN 2/2015
 
