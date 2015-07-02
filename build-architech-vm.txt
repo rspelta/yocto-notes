@@ -29,6 +29,7 @@ Da vedere poi il file per la procedura di collaudo.
 17. Ripulire filesystem con "dd if=/dev/zero of=bigdata"
 18. eliminare in media la cartella RSR
 19. eliminare il file ~/url_download
-20. ripulire history commands (history -c && history -w )
-21. Comprimere vdi con "vboxmanage modifyhd --compact architech-sdk.vdi"
-22. Zip del file VDI
+20. Verificare che la versione delle documentazioni delle schede è corretta
+21. ripulire history commands (history -c && history -w )
+22. Comprimere vdi con "vboxmanage modifyhd --compact architech-sdk.vdi"
+23. Zip del file VDI
