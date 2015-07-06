@@ -1,7 +1,8 @@
 SDK
 ===
-1. Creare la versione "lite" con solo lo splashscreen installato, l'utente installa la board andando su update.
-2. usare EXTRA_IMAGE_FEATURES = "tools-debug eclipse-debug" invece che tcf-agent?
+1. Aggiornare il ramo hachiko con l'uso del java del sistema.
+2. Creare la versione "lite" con solo lo splashscreen installato, l'utente installa la board andando su update.
+3. usare EXTRA_IMAGE_FEATURES = "tools-debug eclipse-debug" invece che tcf-agent?
 
 MICROZED & ZEDBOARD
 ===================
