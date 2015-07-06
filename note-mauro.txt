@@ -1,5 +1,12 @@
 PICOZED
 
+BOOT
+mmcinfo
+fatload mmc 0 0x3000000 uImage
+fatload mmc 0 0x2A00000 picozed-zynq7.dtb
+setenv bootargs ${bootargs} console=ttyPS0,115200 root=/dev/mmcblk0p2 rw earlyprintk rootwait consoleblank=0
+bootm 0x3000000 - 0x2A00000
+
 KERNEL
 git clone -b xlnx_3.14 git://github.com/Xilinx/linux-xlnx.git
 git checkout 2b48a8aeea7367359f9eebe55c4a09a05227f32b
