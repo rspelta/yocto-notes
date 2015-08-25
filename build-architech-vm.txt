@@ -30,6 +30,7 @@ Da vedere poi il file per la procedura di collaudo.
 18. eliminare in media la cartella RSR
 19. eliminare il file ~/url_download
 20. Verificare che la versione delle documentazioni delle schede è corretta
-21. ripulire history commands (history -c && history -w )
-22. Comprimere vdi con "vboxmanage modifyhd --compact architech-sdk.vdi"
-23. Zip del file VDI
+21. Abilitare la richiesta della licenza al primo avvio della vm
+22. ripulire history commands (history -c && history -w )
+23. Comprimere vdi con "vboxmanage modifyhd --compact architech-sdk.vdi"
+24. Zip del file VDI
