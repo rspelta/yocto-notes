@@ -14,6 +14,7 @@ audacity                programma per editare l'audio
 xmodmap                 per rimappare i tasti (xkeycaps versione grafica front-end)
 spotify									player di musica online
 axel										come wget ma scarica con multiple connessioni
+checkinstall            crea un file deb, utile se si ha compilato manualmente un programma e lo si è installato. In questo modo lo si può poi rimuovere correttamente
 
 da testare
 nginx										engine-x, è un web-server leggero e ad alte prestazioni, fa anche da server proxy per la posta elettronica
