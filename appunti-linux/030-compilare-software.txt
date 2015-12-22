@@ -1,0 +1,10 @@
+Compilare software
+==================
+
+1. Scompattare il programma da compilare in /usr/src
+2. Dentro la directory principale creare una directory "build"
+3. dalla directory creata dare il comando ../configure [eventuali argomenti]
+4. Installare le varie dipendenze che ci possono essere per compilare l'applicazione.
+5. make -j X
+6. checkinstall - crea il file deb per installare i binari
+7. testare l'installazione
