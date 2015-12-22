@@ -6,6 +6,7 @@ Compilare software
 3. dalla directory creata dare il comando ../configure [eventuali argomenti]
 4. Installare le varie dipendenze che ci possono essere per compilare l'applicazione.
 5. make -j X
-6. checkinstall - crea il file deb per installare i binari
-7. testare l'installazione e verificare se neccessario lanciare "sudo ldconfig"
-8. verificare dove ha installato i file con il comando "dpkg -L package_name"
+6. checkinstall - crea il file deb per installare i binari esempio: "sudo checkinstall -y --pkgname=wxwidgets --pkgversion=3.0.2 --pkgrelease=1 --pkglicense=wxWidgets --pkgsource=http://www.wxwidgets.org/ --maintainer=reingart@gmail.com --requires=libc6,libgcc1,libgdk-pixbuf2.0-0,libgl1,libglib2.0-0,libgstreamer-plugins-base0.10-0,libgstreamer0.10-0,libgtk2.0-0,libjpeg8,libpango1.0-0,libpng12-0,libsm6,libstdc++6,libtiff5,libxinerama1,libxxf86vm1 -D"
+7. installare il pacchetto es. "sudo dpkg -i wxwidgets_3.0.2-1_amd64.deb"
+8. testare l'installazione e verificare se neccessario lanciare "sudo ldconfig"
+9. verificare dove ha installato i file con il comando "dpkg --contents package_name"
