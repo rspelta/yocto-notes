@@ -11,4 +11,4 @@ Compilare software
 8. testare l'installazione e verificare se neccessario lanciare "sudo ldconfig"
 9. verificare dove ha installato i file con il comando "dpkg --contents package_name"
 
-in questo modo se si vuole aggiornare il pacchetto si può disinstallarlo e reinstallarlo con la compilazione nuova
+in questo modo se si vuole aggiornare il pacchetto si può disinstallarlo e reinstallarlo con la compilazione nuova es. "sudo dpkg -r wxwidgets"
