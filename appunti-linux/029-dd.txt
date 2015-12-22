@@ -1,0 +1,11 @@
+Per creare una ISO compressa copiandolo dalla MMC:
+sudo dd if=/dev/mmblk0 bs=10M | gzip -c  > /path/iso.gz
+
+Per creare una MMC copiandola dalla ISO compressa:
+sudo gzip -x /path/iso.gz | dd of=/dev/mmblk0 bs=10M
+
+Per creare una ISO non compressa copiandola dalla MMC:
+sudo dd if=/dev/mmcblk0 of=file.iso bs=10M
+
+Per creare una MMC copiandola dalla ISO non compressa:
+sudo dd if=file.iso of=/dev/mmcblk0 bs=10M
