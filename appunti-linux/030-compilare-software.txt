@@ -8,3 +8,4 @@ Compilare software
 5. make -j X
 6. checkinstall - crea il file deb per installare i binari
 7. testare l'installazione e verificare se neccessario lanciare "sudo ldconfig"
+8. verificare dove ha installato i file con il comando "dpkg -L package_name"
