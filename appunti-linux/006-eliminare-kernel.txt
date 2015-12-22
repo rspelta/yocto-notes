@@ -14,7 +14,7 @@ sudo apt-get purge linux-image-3.2.0-27-generic linux-image-3.2.0-29-generic
 • Per rimuovere i rimasugli:
 sudo apt-get autoremove 
 
-controllare che in /usr/src vengano cancellati anche i linux-headers-3.2.0-*-generic
+controllare che in /usr/src vengano cancellati anche i linux-headers-3.2.0-*-generic e anche in /lib/modules vengano rimossi i moduli
 
 CENTOS
 
